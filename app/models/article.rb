@@ -35,6 +35,8 @@ class Article < ApplicationRecord
     #メゾット名を書いてprivateに実行するメゾットをかく
     validate :validate_title_and_content_length
 
+    has_many :comments, dependent: :destroy
+
     #belongs_to :　　　はarticleとuserは紐づいてることを表す
     belongs_to :user
 
