@@ -21,4 +21,22 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+        # has_many :　　　　はmodelを紐付けることができる（user_modelとarticle_modelを紐付け）modelは複数系
+        # dependent: :destroyはユーザーが退会したら記事を全部消す
+   has_many :articles, dependent: :destroy
+
+
+  #コードが長くなったりわかりにくい場合modelにメゾットを書いてわかりやすくする必要がある
+  # exists?はテーブルにレコードにあるかないかだけ判断できる
+   def has_written?(article)
+      articles.exists?(id: article.id)
+   end
+     
+
+   #seki1020.gmail.com
+   def display_name
+     self.email.split('@').first
+     # => ['seki1020', 'gmail.com']
+   end
 end
