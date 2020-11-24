@@ -1,0 +1,6 @@
+ja:
+  enum:
+    genders:
+      male: '男性'
+      famale: '女性'
+      other: 'その他'

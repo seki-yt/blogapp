@@ -25,6 +25,10 @@ class User < ApplicationRecord
         # has_many :　　　　はmodelを紐付けることができる（user_modelとarticle_modelを紐付け）modelは複数系
         # dependent: :destroyはユーザーが退会したら記事を全部消す
    has_many :articles, dependent: :destroy
+   has_one :profile, dependent: :destroy
+
+   delegate :birthday, :age, :gender, to: :profile, allow_nil: true
+   # => これを定義するとしたのbirthdayとgenderは使わなくてよくなる
 
 
   #コードが長くなったりわかりにくい場合modelにメゾットを書いてわかりやすくする必要がある
@@ -36,7 +40,31 @@ class User < ApplicationRecord
 
    #seki1020.gmail.com
    def display_name
-     self.email.split('@').first
-     # => ['seki1020', 'gmail.com']
+    #  if profile && profile.nickname
+    #  profile.nickname || self.email.split('@').first
+    #  => ['seki1020', 'gmail.com']
+    #  end
+
+     profile&.nickname || self.email.split('@').first
    end
+
+    #  def birthday
+    #    profile&.birthday
+    #  end
+
+    #  def gender
+    #    profile&.gender
+    # end
+
+   def prepare_profile
+     profile || build_profile
+   end
+
+    def avatar_image
+      if profile&.avatar&.attached?
+        profile.avatar
+      else
+        'default-avatar.png'
+      end
+    end
 end
