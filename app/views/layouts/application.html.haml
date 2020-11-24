@@ -18,9 +18,9 @@
         %p.header_pageTitle BlogApp
       %p.header_pageTitle 新聞記事
       .dropdown
-        = image_tag 'default-avatar.png', class: 'header_avater dropbtn'
+        = image_tag current_user.avatar_image, class: 'header_avatar dropbtn'
         .dropdown-content
-          %a{:href => "#"} プロフィール
+          =link_to "プロフィール", profile_path
           %a{:href => "#"} ログアウト
     - if flash.present?
       .flash
