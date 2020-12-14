@@ -15,13 +15,15 @@
         = link_to :back do
           - if !current_page?(root_path)
             - image_tag 'back.svg', class: 'header_bag'
-        %p.header_pageTitle BlogApp
+        %p.header_pageTitle 
+          = link_to 'BlogApp', root_path
       %p.header_pageTitle 新聞記事
       .dropdown
         = image_tag current_user.avatar_image, class: 'header_avatar dropbtn'
         .dropdown-content
-          =link_to "プロフィール", profile_path
-          %a{:href => "#"} ログアウト
+          = link_to 'プロフィール', profile_path
+          = link_to 'お気に入り', favorites_path
+          = link_to 'ログアウト', destroy_user_session_path, data: { method: 'delete' }
     - if flash.present?
       .flash
         - flash.each do |key, value|
