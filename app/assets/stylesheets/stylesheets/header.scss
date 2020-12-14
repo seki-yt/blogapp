@@ -11,6 +11,10 @@ $back-icon-size: 16px;
   padding: $header-padding-y 16px;
   font-weight: bold;
 
+  a {
+    color :white;
+  }
+
   &_logos {
     min-width: 0;
     display: flex;
