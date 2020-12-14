@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   #入れ子構造にしてresourcesを作れば良い
   resources :articles do
     resources :comments, only: [:new, :create]
+    
     resource :like, only: [:create, :destroy]
   end
 
