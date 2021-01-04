@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   #/articles/:article_id/commentsみたいにarticlesの下にcommentsにurlを作る方法は
   #入れ子構造にしてresourcesを作れば良い
   resources :articles do
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:index, :new, :create]
 
-    resource :like, only: [:create, :destroy]
+    resource :like, only: [:show, :create, :destroy]
   end
 
   resources :accounts, only: [:show] do
